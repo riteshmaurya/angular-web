@@ -1,0 +1,23 @@
+<!-- <i class="fa"
+  [class.fa-star]="isSelected"
+  [class.fa-star-o]="!isSelected"
+  (click)="onClick()"
+></i> -->
+<!-- <br/>
+<br/> -->
+<i class="fa"
+  [class.fa-thumbs-up]="isSelected"
+  [class.fa-thumbs-o-up]="!isSelected"
+  (click)="onClick()"
+></i>
+<br/>
+<i class="fa" 
+  
+  [ngClass] = "{
+    'fa-user': isSelected,
+    'fa-user-o': !isSelected,
+    'fa-2x': isSelected
+  }"
+  (click)="onClick()"
+></i>
+<br/>

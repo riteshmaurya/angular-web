@@ -1,0 +1,31 @@
+<h2>list of courses</h2>
+<ul>
+  <li *ngFor="let course of courses">
+    {{ course }}
+  </li>
+</ul>
+{{ title }}
+<!-- <img [src]="imageUrl"/> -->
+<br/>
+<tr>
+  <td [attr.colspan]="colSpan">
+    hello
+  </td>
+</tr>
+<br/>
+<br/>
+<button [style.backgroundColor]="isActive ? 'blue': 'RED'" class="btn btn-primary" [class.active]="isActive">Save</button>
+<!-- <input [value]="email1" (keyup.enter)="keypressed()"/> -->
+<input [(ngModel)]="email" (keyup.enter)="keypressed()"/>
+<br/>
+<br/>
+<div>
+  {{ course.name | uppercase | lowercase}} <br/>
+  {{ course.rating | number:'1.1-3'}} <br/>
+  {{ course.students }} <br/>
+  {{ course.price | currency}} <br/>
+  {{ course.releaseDate | date:'dd-MM-yyyy'}} <br/>
+</div>
+<div>
+  {{ story | summary}}
+</div>

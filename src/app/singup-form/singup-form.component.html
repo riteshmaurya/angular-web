@@ -1,0 +1,37 @@
+<div id="main">
+<form [formGroup]="form" (ngSubmit)="login()">
+  <div class="alert alert-danger" *ngIf="form.errors">
+    username or password invalid!
+  </div>
+  <!-- <div ngModelGroup #signin="ngModelGroup"> -->
+    <div class="form-group">
+      <label for="username">
+        Username
+      </label>
+      <input 
+      formControlName="username" 
+      type="text" 
+      class="form-control" 
+      id="username">
+      <div *ngIf="form.get('username').pending"><i class="fa fa-spinner fa-spin" style="font-size:24px;color:black"></i></div>
+      <div *ngIf="form.get('username').touched && form.get('username').invalid" class="alert alert-danger">
+          <div *ngIf="form.get('username').errors.required">Username is required</div>
+          <div *ngIf="form.get('username').errors.minlength">Min length shoutd be {{ form.get('username').errors.minlength.requiredLength}}</div>
+          <div *ngIf="form.get('username').errors.shouldBeUnique">Username already exists!</div>
+      </div>
+      
+    </div>
+    <div class="form-group">
+        <label for="password">
+          Password
+        </label>
+        <input 
+        formControlName="password" 
+        type="password" 
+        class="form-control" 
+        id="password">
+      </div>        
+  <!-- </div> -->
+  <button class="btn btn-primary">Sign In</button>
+</form>
+</div>
