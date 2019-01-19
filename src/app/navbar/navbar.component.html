@@ -6,18 +6,31 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link" 
+      *ngIf="authService.isLoggedIn() && authService.currentUser.admin"
       routerLinkActive="active current" 
-      routerLink="/posts">Posts <span class="sr-only">(current)</span></a>
+      routerLink="/admin">Admin<span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" 
       routerLinkActive="active current" 
-      routerLink="/contactForm" [queryParams]="{page: 1, order: 'newest'}">Contact Form</a>
+      routerLink="/contactForm" 
+      [queryParams]="{page: 1, order: 'newest'}">Contact Form</a>
       <a class="nav-item nav-link" 
       routerLinkActive="active current" 
-      routerLink="#">Pricing</a>
-      <a class="nav-item nav-link disabled" 
+      routerLink="/posts">Posts</a>      
+      <a *ngIf="!authService.isLoggedIn()"
+      class="nav-item nav-link" 
+      routerLinkActive="active current" 
+      routerLink="/login">Sign In</a>
+      <a 
+      *ngIf="authService.isLoggedIn()" 
+      href="#" 
+      (click)="authService.logout()"
+      class="nav-item nav-link" 
+      routerLinkActive="active current" 
+      routerLink="/logout">Logout</a>      
+      <!-- <a class="nav-item nav-link disabled" 
       routerLinkActive="active current" 
       routerLink="#" 
       tabindex="-1" 
-      aria-disabled="true">Disabled</a>
+      aria-disabled="true">Disabled</a> -->
     </div>
   </div>
