@@ -7,7 +7,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 export class FakeBackendInterceptor implements HttpInterceptor {
  
     constructor() { }
-     token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1ODYyMzkwMjJ9._eg7_p_BdPPCfXyMdvRhQJN4xIEZFfQJf4EcnT_tsGI';
+     token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlJpdGVzaCBNYXVyeWEiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1ODYyMzkwMjJ9.bZW7RKkVDBU5ieBsJQRouiu3H6CM10hpUC1NomCzkaA';
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // array in local storage for registered users
@@ -19,7 +19,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // authenticate
             if (request.url.endsWith('/api/authenticate') && request.method === 'POST') {
                 console.log("inside mock service");
-                console.log(request.body.inputEmail);
                 if(request.body.inputEmail === '1234' && request.body.inputPassword === '1234') {
                     console.log("inside mock service aad");
                     return of(new HttpResponse({ status: 200, body: {token: this.token} }));
@@ -54,8 +53,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
 
             if (request.url.endsWith('/api/orders') && request.method === 'GET') {
-
-                if(request.headers.get('Authentication') === 'Bearer '+this.token && request.body.password === '1234') {
+                console.log('/api/orders');
+                if(request.headers.get('Authorization') === 'Bearer '+this.token ) {
+                    console.log('/api/orders authorized');
                     return of(new HttpResponse({ status: 200, body: [1,2,3,4] }));
                 } else {
                     // else return 400 bad request

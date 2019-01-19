@@ -1,7 +1,7 @@
 import { AuthService } from './../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-retail-login',
@@ -12,6 +12,7 @@ export class RetailLoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService
   ) { }
 
@@ -22,7 +23,8 @@ export class RetailLoginComponent implements OnInit {
     this.authService.login(credentials).subscribe(result=>{
       this.router.navigate(['/']);
       if(result){
-        this.router.navigate(['/']);
+        let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
+        this.router.navigate([returnUrl || '/']);
       }else{
         this.inValidLogin = true;
       }

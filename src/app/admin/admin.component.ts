@@ -1,4 +1,7 @@
+import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-admin',
@@ -6,13 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  orderList : any[];
-  constructor() {
-    this.orderList = [1,2,3,4,5,6,7,8,9];
+  constructor(
+    private httpClient: HttpClient,
+    private orderService: OrderService
+    ) {
+
    }
+orders;
+
 
   ngOnInit() {
-
+    this.orderService.getOrders()
+      .subscribe(orders => this.orders = orders);
   }
 
 }

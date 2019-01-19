@@ -28,13 +28,12 @@ export class AuthService {
   
     let jwtHelper = new JwtHelperService();
     let token = localStorage.getItem('token');
-    //console.log(token);
     if(!token)
     return false;
     let expirationDate = jwtHelper.getTokenExpirationDate(token);
     let isExpired = jwtHelper.isTokenExpired(token);
-    console.log("expirationDate", expirationDate);
-    console.log("isExpired", isExpired);
+    //console.log("expirationDate", expirationDate);
+    //console.log("isExpired", isExpired);
     return !isExpired;
   }
 
@@ -42,4 +41,16 @@ export class AuthService {
     console.log("logout");
     localStorage.removeItem('token');
   }
+
+  get currentUser()
+  {
+    let token = localStorage.getItem('token');
+    if(!token){
+      return null;
+    }
+    let decodedToken = new JwtHelperService().decodeToken(token);
+    //console.log(decodedToken);
+    return decodedToken; //new JwtHelperService().decodeToken(token);
+  }
+
 }

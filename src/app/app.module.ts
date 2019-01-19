@@ -24,6 +24,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { fakeBackendProvider } from './FakeBackendInterceptor';
+import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,7 @@ import { fakeBackendProvider } from './FakeBackendInterceptor';
     CourseService,
     PostService,
     fakeBackendProvider,
-    JwtHelperService
+    JwtHelperService,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,5 @@
+import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
+import { AuthGaurd } from './services/auth-gaurd.service';
 import { RetailLoginComponent } from './retail-login/retail-login.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { LoginComponent } from './login/login.component';
@@ -13,7 +15,8 @@ const routes: Routes = [
 
   {
     path: 'admin', 
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [AuthGaurd, AdminAuthGaurd]
   },
   {
     path: 'login', 
